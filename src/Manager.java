@@ -15,16 +15,24 @@ public class Manager{
         empty = new Semaphore(0);
     }
 
-    public Semaphore getAccessSemaphore() {
-        return access;
+    public void acquireStorageSemaphore() throws InterruptedException {
+        access.acquire();
+    }
+    public void releaseStorageSemaphore() throws InterruptedException {
+        access.release();
     }
 
-    public Semaphore getFullStorageSemaphore() {
-        return fullStorage;
+    public void acquireFullStorageSemaphore() throws InterruptedException {
+        fullStorage.acquire();
     }
-
-    public Semaphore getEmptySemaphore() {
-        return empty;
+    public void releaseFullStorageSemaphore() throws InterruptedException {
+        fullStorage.release();
+    }
+    public void acquireEmptySemaphore() throws InterruptedException {
+        empty.acquire();
+    }
+    public void releaseEmptySemaphore() throws InterruptedException {
+        empty.release();
     }
 
     public ArrayList<String> getStorage() {

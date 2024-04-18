@@ -20,15 +20,15 @@ public class Consumer implements Runnable{
             String item;
             try {
                 Thread.sleep(1000);
-                manager.getEmptySemaphore().acquire();
-                manager.getAccessSemaphore().acquire();
+                manager.acquireEmptySemaphore();
+                manager.acquireStorageSemaphore();
 
                 item = manager.getStorage().get(0);
                 manager.getStorage().remove(0);
                 System.out.println("Took " + item + " by " + name);
 
-                manager.getAccessSemaphore().release();
-                manager.getFullStorageSemaphore().release();
+                manager.releaseStorageSemaphore();
+                manager.releaseFullStorageSemaphore();
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

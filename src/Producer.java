@@ -19,14 +19,14 @@ public class Producer implements Runnable{
         for (int i = 0; i < itemNumbers; i++) {
             try {
                 Thread.sleep(1000);
-                manager.getFullStorageSemaphore().acquire();
-                manager.getAccessSemaphore().acquire();
+                manager.acquireFullStorageSemaphore();
+                manager.acquireStorageSemaphore();
 
                 manager.getStorage().add("item " + i + " (" + name + ")");
                 System.out.println("Added item " + i + " by " + name);
 
-                manager.getAccessSemaphore().release();
-                manager.getEmptySemaphore().release();
+                manager.releaseStorageSemaphore();
+                manager.releaseEmptySemaphore();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
